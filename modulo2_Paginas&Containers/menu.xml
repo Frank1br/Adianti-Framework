@@ -38,7 +38,7 @@
         <menu>
             <menuitem label='Teste'>
                 <icon>fa:cube fa-fw</icon>
-                <action>TesteView</action>
+                <action>TemplateViewBasico</action>
             </menuitem>
         </menu>
     </menuitem>

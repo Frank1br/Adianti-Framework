@@ -14,13 +14,20 @@ class TemplateViewBasico extends TPage
             $anuncioItem->textoPrincipal = 'Carro compacto, econômico e versátil';
             $anuncioItem->TextoSecundario = 'Anúncio publicado em 10/10/2025';
 
-            $repacles = [''];
-            $repacles['Titulo'] = $anuncioItem->Titulo;
-            $repacles['textoPrincipal'] = $anuncioItem->textoPrincipal;
-            // $repacles['TextoSecundario'] = $anuncioItem->TextoSecundario;
+            $replaces = [];  
+            $replaces['Titulo'] = $anuncioItem->Titulo;
+            $replaces['textoPrincipal'] = $anuncioItem->textoPrincipal;
             
-            $repacles['anuncio'] = $anuncioItem;
-            $html->enableSection('main', $repacles);
+            $replaces['anuncio'] = $anuncioItem;
+            $html->enableSection('main', $replaces);  
+
+
+            $replaces2 = [];
+            $replaces2['Titulo'] = 'Toyota Corolla';
+            $replaces2['textoPrincipal'] = 'Sedan confortável, espaçoso e eficiente';
+            $replaces2['TextoSecundario'] = 'Anúncio publicado em 15/11/2025';
+            
+            $html->enableSection('outros', $replaces2);
 
             parent::add($html);
         } 
@@ -28,6 +35,5 @@ class TemplateViewBasico extends TPage
         {
             new TMessage('error', $e->getMessage());
         }
-        
     }
 }
