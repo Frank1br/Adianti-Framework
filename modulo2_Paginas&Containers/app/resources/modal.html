@@ -1,0 +1,25 @@
+<!--[main]-->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">{{title}}</div>
+
+    <div class="header-actions">
+        <a href="" class="btn btn-danger" style="float:right" id="close-modal"> Fechar </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote">
+      {{body}}
+    </blockquote>
+  </div>
+  <div class="card-footer"> {{footer}} </div>
+</div>
+
+    <script>
+    $('#close-modal').on('click', function(e) {
+        $('[widget="TWindow"]').remove();
+    });
+    </script>
+<!--[/main]-->
+
+

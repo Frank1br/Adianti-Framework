@@ -70,6 +70,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>OnDemandWindowView</action>
             </menuitem>
+
+            <menuitem label='Modal '>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>ModalWindowView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
