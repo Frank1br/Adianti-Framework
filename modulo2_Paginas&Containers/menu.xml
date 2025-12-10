@@ -55,6 +55,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>TemplateViewRepeat</action>
             </menuitem>
+
+            <menuitem label='Pagina Simples'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>SinglePageView</action>
+            </menuitem>
         </menu>
     </menuitem>
 

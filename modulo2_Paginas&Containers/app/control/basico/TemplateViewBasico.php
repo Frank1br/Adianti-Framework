@@ -28,8 +28,12 @@ class TemplateViewBasico extends TPage
             $replaces2['TextoSecundario'] = 'Anúncio publicado em 15/11/2025';
             
             $html->enableSection('outros', $replaces2);
+            $vbox = new TVBox;
+            $vbox->style = 'width: 100%';
+            $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
+            $vbox->add($html);
 
-            parent::add($html);
+            parent::add($vbox);
         } 
         catch (Exception $e)
         {

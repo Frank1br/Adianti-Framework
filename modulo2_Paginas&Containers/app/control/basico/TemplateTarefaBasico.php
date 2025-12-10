@@ -44,8 +44,12 @@ class TemplateTarefaBasico extends TPage
             $html->enableSection('tarefa3', $replaces3);
 
             $html->enableSection('main');
-            
-            parent::add($html);
+            $vbox = new TVBox;
+            $vbox->style = 'width: 100%';
+            $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
+            $vbox->add($html);
+
+            parent::add($vbox);
         }
         catch (Exception $e)
         {
