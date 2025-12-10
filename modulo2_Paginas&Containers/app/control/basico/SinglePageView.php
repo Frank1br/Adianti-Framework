@@ -5,6 +5,7 @@ class SinglePageView extends TPage
     public function __construct()
     {
         parent::__construct();
+        
 
         try
         {

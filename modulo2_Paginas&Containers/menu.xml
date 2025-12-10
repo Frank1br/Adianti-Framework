@@ -60,6 +60,16 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>SinglePageView</action>
             </menuitem>
+
+            <menuitem label='Janela Simples'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>SingleWindowView</action>
+            </menuitem>
+
+            <menuitem label='Janela Sob Demanda '>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>OnDemandWindowView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
