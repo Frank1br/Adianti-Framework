@@ -50,6 +50,11 @@
                 <icon>fa:calendar fa-fw</icon>
                 <action>TemplateViewMask</action>
             </menuitem>
+
+            <menuitem label='Funcionarios'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>TemplateViewRepeat</action>
+            </menuitem>
         </menu>
     </menuitem>
 
