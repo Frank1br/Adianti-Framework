@@ -34,22 +34,23 @@
     </menuitem>
 
     <menuitem label='Basico'>
-        <icon>fa:cog fa-fw</icon>
+        <icon>fa:folder fa-fw</icon>
         <menu>
             <menuitem label='Teste'>
                 <icon>fa:cube fa-fw</icon>
                 <action>TemplateViewBasico</action>
             </menuitem>
-        </menu>
-    </menuitem>
 
-    <menuitem label='Tarefa'>
-        <icon>fa:cog fa-fw</icon>
-        <menu>
             <menuitem label='Tarefas diarias'>
-                <icon>fa:cube fa-fw</icon>
+                <icon>fa:list fa-fw</icon>
                 <action>TemplateTarefaBasico</action>
+            </menuitem>
+
+            <menuitem label='Mascaras'>
+                <icon>fa:calendar fa-fw</icon>
+                <action>TemplateViewMask</action>
             </menuitem>
         </menu>
     </menuitem>
+
 </menu>
