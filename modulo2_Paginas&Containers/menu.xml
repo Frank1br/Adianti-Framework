@@ -75,6 +75,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>ModalWindowView</action>
             </menuitem>
+
+            <menuitem label='Sidebar (Cortina Lateral)'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>SidePageView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
