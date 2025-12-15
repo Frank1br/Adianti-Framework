@@ -80,6 +80,21 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>SidePageView</action>
             </menuitem>
+
+            <menuitem label='Embedded System (Sistema Incorporado) PDF'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>EmbeddedPDFview</action>
+            </menuitem>
+
+            <menuitem label='Embedded System (Sistema Incorporado) Video'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>EmbeddedVideoView</action>
+            </menuitem>
+
+            <menuitem label='Embedded System (Sistema Incorporado) Site'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>EmbeddedSystemView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
