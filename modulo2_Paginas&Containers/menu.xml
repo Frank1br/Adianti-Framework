@@ -100,6 +100,16 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>TableView</action>
             </menuitem>
+
+            <menuitem label='PanelGroupView'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>PanelGroupView</action>
+            </menuitem>
+
+            <menuitem label='ScrollView'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>ScrollView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
