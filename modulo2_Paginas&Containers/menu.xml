@@ -95,6 +95,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>EmbeddedSystemView</action>
             </menuitem>
+
+            <menuitem label='TableView'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>TableView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
