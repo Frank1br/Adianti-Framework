@@ -115,6 +115,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>NotebookView</action>
             </menuitem>
+
+            <menuitem label='BoxesView'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>BoxesView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
