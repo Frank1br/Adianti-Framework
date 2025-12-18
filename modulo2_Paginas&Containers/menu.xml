@@ -121,9 +121,14 @@
                 <action>VBoxView</action>
             </menuitem>
 
-            <menuitem label='DialogsView'>
+            <menuitem label='Dialogo de Mensagens'>
                 <icon>fa:info-circle fa-fw</icon>
-                <action>DialogsView</action>
+                <action>InformationView</action>
+            </menuitem>
+
+            <menuitem label='Dialogo de perguntas'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>QuestionView</action>
             </menuitem>
         </menu>
     </menuitem>
