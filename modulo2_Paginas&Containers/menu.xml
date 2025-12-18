@@ -130,6 +130,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>QuestionView</action>
             </menuitem>
+
+            <menuitem label='DialogInputView'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>DialogInputView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
