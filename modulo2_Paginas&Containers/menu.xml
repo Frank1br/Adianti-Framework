@@ -120,6 +120,11 @@
                 <icon>fa:info-circle fa-fw</icon>
                 <action>BoxesView</action>
             </menuitem>
+
+            <menuitem label='DialogsView'>
+                <icon>fa:info-circle fa-fw</icon>
+                <action>DialogsView</action>
+            </menuitem>
         </menu>
     </menuitem>
 
