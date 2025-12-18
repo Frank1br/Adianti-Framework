@@ -7,7 +7,7 @@ use Adianti\Control\TAction;
 /**
  * Pillbar
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage util
  * @author     Pablo Dall'Oglio
@@ -78,20 +78,14 @@ class TPillBar extends TElement
             foreach ($this->items as $key => $item)
             {
                unset($item->{'class'});
-               $children = $item->getChildren();
-               
-               if (is_array($children) && $children[0] instanceof TElement)
+               if ($n === $index)
                {
-                   if ($n === $index)
+                   $children = $item->getChildren();
+                   if (is_array($children) && $children[0] instanceof TElement)
                    {
                        $children[0]->{'class'} .= ' active';
                    }
-                   else
-                   {
-                       $children[0]->{'class'} = str_replace('active', '', $children[0]->{'class'});
-                   }
                }
-
                $n ++; 
             }
         }

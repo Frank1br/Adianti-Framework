@@ -8,7 +8,7 @@ use Adianti\Widget\Base\TScript;
 /**
  * Message Dialog
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage dialog
  * @author     Pablo Dall'Oglio

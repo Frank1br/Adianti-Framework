@@ -17,7 +17,7 @@ use Exception;
 /**
  * Standard Form List Trait
  *
- * @version    8.3
+ * @version    8.2
  * @package    base
  * @author     Pablo Dall'Oglio
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)

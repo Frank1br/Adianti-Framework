@@ -37,10 +37,3 @@
         width: auto;
     }
 }
-
-body.boxed-layout .navbar-collapse.navbar,
-body.boxed-layout  #adianti_div_content,
-body.boxed-layout .footer>.container-fluid {
-    max-width: 1200px;
-    margin: auto;
-}

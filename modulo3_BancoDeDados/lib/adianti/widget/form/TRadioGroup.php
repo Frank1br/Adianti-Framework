@@ -16,7 +16,7 @@ use Exception;
 /**
  * A group of RadioButton's
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage form
  * @author     Pablo Dall'Oglio

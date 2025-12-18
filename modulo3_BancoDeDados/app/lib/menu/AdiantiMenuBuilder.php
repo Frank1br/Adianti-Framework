@@ -1,7 +1,7 @@
 <?php
 class AdiantiMenuBuilder
 {
-    const CHECK_PERMISSION = null;
+    const CHECK_PERMISSION = null; // ['SystemPermission', 'checkPermission'];
     
     /**
      * Parse main menu and converts into HTML
@@ -44,7 +44,7 @@ class AdiantiMenuBuilder
         if (!empty($ini['template']['navbar']['allow_page_tabs']))
         {
             $action = $menuitem->getAction();
-            if (!$menuitem->getMenu() && strpos($action, 'LoginForm#method=onLogout') === false)
+            if (!$menuitem->getMenu())
             {
                 $open_tab = new TElement('div');
                 $open_tab->title = _t('Open in new tab');

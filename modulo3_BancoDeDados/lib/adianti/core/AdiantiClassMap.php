@@ -4,7 +4,7 @@ namespace Adianti\Core;
 /**
  * Class map
  *
- * @version    8.3
+ * @version    8.2
  * @package    core
  * @author     Pablo Dall'Oglio
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
@@ -182,11 +182,6 @@ class AdiantiClassMap
         $classPath['TQuickForm']                      = 'lib/adianti/widget/wrapper/TQuickForm.php';
         $classPath['TQuickGrid']                      = 'lib/adianti/widget/wrapper/TQuickGrid.php';
         $classPath['TQuickNotebookForm']              = 'lib/adianti/widget/wrapper/TQuickNotebookForm.php';
-        $classPath['TChartBase']                      = 'lib/adianti/widget/chart/TChartBase.php';
-        $classPath['TBarChart']                       = 'lib/adianti/widget/chart/TBarChart.php';
-        $classPath['TNumericIndicator']               = 'lib/adianti/widget/chart/TNumericIndicator.php';
-        $classPath['TLineChart']                      = 'lib/adianti/widget/chart/TLineChart.php';
-        $classPath['TPieChart']                       = 'lib/adianti/widget/chart/TPieChart.php';
         $classPath['BootstrapNotebookWrapper']        = 'lib/adianti/wrapper/BootstrapNotebookWrapper.php';
         $classPath['BootstrapDatagridWrapper']        = 'lib/adianti/wrapper/BootstrapDatagridWrapper.php';
         $classPath['BootstrapFormWrapper']            = 'lib/adianti/wrapper/BootstrapFormWrapper.php';

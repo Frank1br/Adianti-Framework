@@ -8,11 +8,11 @@ use Adianti\Widget\Wrapper\AdiantiDatabaseWidgetTrait;
 /**
  * Database Arrow Step
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage util
  * @author     Pablo Dall'Oglio
- * @author     Lucas Tomasi (up to version 7.5)
+ * @author     Lucas Tomasi
  * @author     Matheus Agnes Dias (up to version 7.5)
  * @copyright  Copyright (c) 2006-2014 Adianti Solutions Ltd. (http://www.adianti.com.br)
  * @license    https://adiantiframework.com.br/license

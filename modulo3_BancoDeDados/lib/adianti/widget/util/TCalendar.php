@@ -9,7 +9,7 @@ use Adianti\Widget\Base\TElement;
 /**
  * Calendar Widget
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage util
  * @author     Pablo Dall'Oglio

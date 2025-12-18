@@ -14,7 +14,7 @@ var TImageCropper = (function (field, title, buttonLabel, serviceAction, fileHan
     this.base64 = base64;
     this.webcam = webcam;
 
-    this.file_input_hidden = $('input[id=' + field + ']');
+    this.file_input_hidden = $('input[name=' + field + ']');
     this.file = $('#tfile_timagecropper_' + field);
     this.image = $('#timagecropper_' + field);
     this.actions = $('#timagecropper_' + field + '+div.timagecropper_actions');
@@ -629,5 +629,5 @@ var TImageCropper = (function (field, title, buttonLabel, serviceAction, fileHan
 
 function timagecropper_start(field, title, buttonLabel, serviceAction, fileHandling, base64, webcam, config, name, extension) {
     var timagecropper = new TImageCropper(field, title, buttonLabel, serviceAction, fileHandling, base64, webcam, config, name, extension);
-    $('input[id=' + field + ']')[0].timagecropper = timagecropper;
+    $('input[name=' + field + ']')[0].timagecropper = timagecropper;
 }

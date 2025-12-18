@@ -16,7 +16,7 @@ use ReflectionClass;
 /**
  * Implements the Repository Pattern to deal with collections of Active Records
  *
- * @version    8.3
+ * @version    8.2
  * @package    database
  * @author     Pablo Dall'Oglio
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
@@ -61,21 +61,6 @@ class TRepository
     }
     
     /**
-     * Returns a new instance
-     */
-    public function newObject()
-    {
-        return new $this->class;
-    }
-    
-    /**
-     * Return current joins
-     */
-    function getJoins()
-    {
-        return $this->joins;
-    }
-    /**
      * Set criteria
      */
     public function setCriteria(TCriteria $criteria)
@@ -118,11 +103,11 @@ class TRepository
      * Returns the name of database entity
      * @return A String containing the name of the entity
      */
-    public function getEntity($with_joins = true)
+    protected function getEntity()
     {
         $table = constant($this->class.'::TABLENAME');
         
-        if ($this->joins && $with_joins)
+        if ($this->joins)
         {
             $expr = '';
             foreach ($this->joins as $join_table => $conditions)
@@ -401,7 +386,7 @@ class TRepository
         else
         {
             // if there's no active transaction opened
-            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity(false));
+            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity());
         }
     }
     
@@ -549,7 +534,7 @@ class TRepository
         else
         {
             // if there's no active transaction opened
-            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity(false));
+            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity());
         }
     }
     
@@ -680,7 +665,7 @@ class TRepository
         else
         {
             // if there's no active transaction opened
-            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity(false));
+            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity());
         }
     }
     
@@ -745,7 +730,7 @@ class TRepository
         else
         {
             // if there's no active transaction opened
-            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity(false));
+            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity());
         }
     }
     
@@ -875,18 +860,12 @@ class TRepository
         return $this;
     }
     
-    public function addAggregate($function, $column, $alias = null, ?Callable $transformation = null)
-    {
-        $this->aggregates[] = [$function, $column, $alias, $transformation];
-        return $this;
-    }
-    
     /**
      * Aggregate column
      * @param $function Aggregate function (count, sum, min, max, avg)
      * @return          An array of objects or the total value (if does not have group by)
      */
-    public function aggregate($function = null, $column = null, $alias = null, ?Callable $transformation = null)
+    protected function aggregate($function, $column, $alias = null, ?Callable $transformation = null)
     {
         $criteria = isset($this->criteria) ? $this->criteria : new TCriteria;
         
@@ -909,18 +888,16 @@ class TRepository
         $sql = new TSqlSelect;
         if (!empty( $this->criteria->getProperty('group') ))
         {
-            $group_labels = $this->criteria->getProperty('group_labels');
-            
             if (is_array($this->criteria->getProperty('group')))
             {
-                foreach ($this->criteria->getProperty('group') as $group_key => $group)
+                foreach ($this->criteria->getProperty('group') as $group)
                 {
-                    $sql->addColumn( $group . (!empty($group_labels[$group_key]) ? ' as "' .$group_labels[$group_key] . '"': '') );
+                    $sql->addColumn( $group );
                 }
             }
             else
             {
-                $sql->addColumn( $this->criteria->getProperty('group') . (!empty($group_labels[0]) ? ' as "' . $group_labels[0] .'"': '') );
+                $sql->addColumn( $this->criteria->getProperty('group') );
             }
         }
         
@@ -940,10 +917,7 @@ class TRepository
             }
         }
         
-        if (!empty($function) && !empty($column))
-        {
-            $sql->addColumn("$function({$column}) as \"{$alias}\"");
-        }
+        $sql->addColumn("$function({$column}) as \"{$alias}\"");
         
         if (!empty($transformation))
         {
@@ -1003,14 +977,7 @@ class TRepository
                 }
                 else
                 {
-                    if (!empty($alias))
-                    {
-                        return $results[0]->$alias;
-                    }
-                    else
-                    {
-                        return current((array) $results[0]);
-                    }
+                    return $results[0]->$alias;
                 }
             }
             
@@ -1019,7 +986,7 @@ class TRepository
         else
         {
             // if there's no active transaction opened
-            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity(false));
+            throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__ .' '. $this->getEntity());
         }
     }
     

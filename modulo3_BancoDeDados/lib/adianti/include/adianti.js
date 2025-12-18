@@ -279,7 +279,6 @@ function __adianti_show_toast(type, message, place, icon)
 
     var options = {
         message: message,
-        timeout: 3000,
         position: place
     };
 
@@ -299,8 +298,7 @@ function __adianti_show_toast(type, message, place, icon)
     }
 
     iziToast[type]( options );
-}
-/**
+}/**
  * Process popovers
  */
 function __adianti_process_popover()

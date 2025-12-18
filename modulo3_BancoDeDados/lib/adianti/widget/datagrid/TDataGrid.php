@@ -19,7 +19,7 @@ use Exception;
 /**
  * DataGrid Widget: Allows to create datagrids with rows, columns and actions
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage datagrid
  * @author     Pablo Dall'Oglio
@@ -99,7 +99,6 @@ class TDataGrid extends TTable
         $this->forPrinting = false;
         $this->popovers = [];
         $this->rowcount = 0;
-        $this->metadata = [];
         $this->{'class'} = 'tdatagrid_table';
         $this->{'id'}    = 'tdatagrid_' . mt_rand(1000000000, 1999999999);
     }

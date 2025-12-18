@@ -13,11 +13,11 @@ use Adianti\Widget\Util\TImage;
 /**
  * Image uploader with cropper
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage form
+ * @author     Lucas Tomasi
  * @author     Pablo Dall'Oglio
- * @author     Lucas Tomasi (up to version 7.5)
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
  * @license    https://adiantiframework.com.br/license
  */
@@ -57,7 +57,6 @@ class TImageCropper extends TField implements AdiantiWidgetInterface
         $this->id   = 'timagecropper_' . mt_rand(1000000000, 1999999999);
         $this->tag->{'type'}   = 'hidden';
         $this->tag->{'widget'} = 'timagecropper';
-        $this->tag->{'id'} = $this->id;
         $this->tag->{'name'} = $name;
 
         $this->buttonText = 'Ajustar';
@@ -342,7 +341,7 @@ class TImageCropper extends TField implements AdiantiWidgetInterface
         $actions->add($remover)->{'action'} = 'remove';
         
         $img = new TElement('img');
-        $img->{'id'}    = 'timagecropper_' . $this->id;
+        $img->{'id'}    = 'timagecropper_' . $this->name;
         $img->{'class'} = 'img_imagecropper rounded timagecropper';
         $img->{'style'} = "max-width: {$this->width}; max-height: {$this->height};margin: auto;";
 
@@ -396,7 +395,7 @@ class TImageCropper extends TField implements AdiantiWidgetInterface
 
         $this->tag->{'value'} = $this->value;
 
-        $file = new TEntry('tfile_timagecropper_' . $this->id);
+        $file = new TEntry('tfile_timagecropper_' . $this->name);
         $file->{'accept'} =  '.' . implode(',.', $this->extensions);
         $file->{'type'}   = 'file';
         $file->{'class' } = "sr-only";
@@ -423,6 +422,6 @@ class TImageCropper extends TField implements AdiantiWidgetInterface
         $base64 = $this->base64 ? '1' : '0';
         $webcam = $this->webcam ? '1' : '0';
 
-        TScript::create("timagecropper_start('{$this->id}', '{$this->title}', '{$this->buttonText}', '{$action}', {$fileHandling}, {$base64}, {$webcam}, {$options}, '{$fileName}', '{$fileExtension}');");
+        TScript::create("timagecropper_start('{$this->name}', '{$this->title}', '{$this->buttonText}', '{$action}', {$fileHandling}, {$base64}, {$webcam}, {$options}, '{$fileName}', '{$fileExtension}');");
     }
 }

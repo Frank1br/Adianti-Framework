@@ -8,7 +8,7 @@ use Adianti\Widget\Form\TEntry;
 /**
  * Representes a DataGrid column
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage datagrid
  * @author     Pablo Dall'Oglio
@@ -229,14 +229,6 @@ class TDataGridColumn
     }
     
     /**
-     * Change database column's name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-    
-    /**
      * Returns the database column's name
      */
     public function getName()
@@ -366,29 +358,11 @@ class TDataGridColumn
         
         if ($function == 'sum')
         {
-            $this->setTotalFunction( function($values) {
-                return array_sum(array_filter($values, 'is_numeric'));
-            });
-        }
-        else if ($function == 'min') {
-            $this->setTotalFunction(function($values) {
-                return min($values);
-            });
-        }
-        else if ($function == 'max') {
-            $this->setTotalFunction(function($values) {
-                return max($values);
-            });
-        }
-        else if ($function == 'avg') {
-            $this->setTotalFunction(function($values) {
-                return count($values) ? array_sum(array_filter($values, 'is_numeric')) / count($values) : 0;
-            });
-        }
-        else if ($function == 'count') {
-            $this->setTotalFunction(function($values) {
-                return count($values);
-            });
+            $totalCallback = function($values) {
+                return array_sum($values);
+            };
+            
+            $this->setTotalFunction( $totalCallback );
         }
     }
     

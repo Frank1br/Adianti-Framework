@@ -31,15 +31,6 @@
     --bs-card-cap-bg: white;
 }
 
-.card.nopadding .card-body { 
-    padding:0 !important;
-    padding-top: 10px !important;
-}
-
-.card.nopadding .tab-pane {
-    padding:0 !important;
-}
-
 .card.noborder {
     border:0;
     box-shadow:none;

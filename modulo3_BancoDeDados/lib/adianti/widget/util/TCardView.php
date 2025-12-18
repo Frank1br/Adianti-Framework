@@ -18,7 +18,7 @@ use ApplicationTranslator;
 /**
  * Card
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage util
  * @author     Pablo Dall'Oglio
@@ -68,8 +68,7 @@ class TCardView extends TElement
         $this->contentHeight   = NULL;
         $this->useDefaultClickHead = FALSE;
         $this->useDefaultClickBody = FALSE;
-        $this->forPrinting     = false;
-        $this->metadata        = [];
+        $this->forPrinting = false;
         
         $this->{'id'}          = 'tcard_' . mt_rand(1000000000, 1999999999);
         $this->{'class'}       = 'card-wrapper';

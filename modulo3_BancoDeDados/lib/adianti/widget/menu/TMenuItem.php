@@ -2,7 +2,6 @@
 namespace Adianti\Widget\Menu;
 
 use Adianti\Core\AdiantiCoreApplication;
-use Adianti\Core\AdiantiApplicationConfig;
 use Adianti\Widget\Menu\TMenu;
 use Adianti\Widget\Base\TElement;
 use Adianti\Widget\Util\TImage;
@@ -10,7 +9,7 @@ use Adianti\Widget\Util\TImage;
 /**
  * MenuItem Widget
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage menu
  * @author     Pablo Dall'Oglio
@@ -231,11 +230,6 @@ class TMenuItem extends TElement
         if (substr($this->label, 0, 3) == '_t{')
         {
             $label->add(_t(substr($this->label,3,-1)));
-        }
-        else if (substr($this->label, 0, 4) == '_tf{')
-        {
-            $ini = AdiantiApplicationConfig::get();
-            $label->add(_tf(substr($this->label,4,-1), $ini['general']['source_language']));
         }
         else
         {

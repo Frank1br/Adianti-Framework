@@ -17,11 +17,11 @@ use Exception;
 /**
  * Kanban
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage util
+ * @author     Artur Comunello
  * @author     Pablo Dall'Oglio
- * @author     Artur Comunello (up to version 7.0)
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
  * @license    https://adiantiframework.com.br/license
  */
@@ -57,7 +57,6 @@ class TKanban extends TElement
         $this->stageActions   = [];
         $this->stageShortcuts = [];
         $this->topScrollbar   = false;
-        $this->metadata       = [];
         
         $this->kanban                 = new TElement('div');
         $this->kanban->{'id'}         = 'tkanban_' . mt_rand(1000000000, 1999999999);

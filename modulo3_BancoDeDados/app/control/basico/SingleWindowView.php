@@ -1,26 +1,23 @@
 <?php
-
 class SingleWindowView extends TWindow
 {
     public function __construct()
     {
         parent::__construct();
-        parent::setTitle('Titulo Janela');
-        parent::setSize(800, 400);
-        parent::removePadding();
+        parent::setTitle('Título da janela');
+        parent::setSize(0.5, null);
+        //parent::enableMobileFullScreen();
         
-       
         $html = new THtmlRenderer('app/resources/page.html');
-
-        $replace = [];
-        $replace['title']  = 'Minha pagina criada com Template';
-        $replace['body']   = 'Conteudo da minha pagina criada com Template';
-        $replace['footer'] = 'Rodape da minha pagina criada com Template';
-
-        $html->enableSection('main', $replace);
-
+        
+        $replaces = [];
+        $replaces['title']  = 'Título';
+        $replaces['body']   = 'Conteúdo';
+        $replaces['footer'] = 'Rodapé';
+        
+        $html->enableSection('main', $replaces);
+        
         parent::add($html);
-
         
     }
 }

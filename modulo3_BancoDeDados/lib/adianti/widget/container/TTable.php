@@ -7,7 +7,7 @@ use Adianti\Widget\Container\TTableRow;
 /**
  * Creates a table layout, with rows and columns
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage container
  * @author     Pablo Dall'Oglio

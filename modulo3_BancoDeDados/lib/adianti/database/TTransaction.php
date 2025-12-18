@@ -16,7 +16,7 @@ use Exception;
 /**
  * Manage Database transactions
  *
- * @version    8.3
+ * @version    8.2
  * @package    database
  * @author     Pablo Dall'Oglio
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
@@ -222,17 +222,6 @@ class TTransaction
         {
             // if there's no active transaction opened
             throw new Exception(AdiantiCoreTranslator::translate('No active transactions') . ': ' . __METHOD__);
-        }
-    }
-    
-    /**
-     * Returns current transaction logger
-     */
-    public static function getLogger()
-    {
-        if (isset(self::$conn[self::$counter]))
-        {
-            return self::$logger[self::$counter];
         }
     }
     

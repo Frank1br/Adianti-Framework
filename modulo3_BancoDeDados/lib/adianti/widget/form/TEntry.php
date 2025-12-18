@@ -13,7 +13,7 @@ use Exception;
 /**
  * Entry Widget
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage form
  * @author     Pablo Dall'Oglio
@@ -456,12 +456,6 @@ class TEntry extends TField implements AdiantiWidgetInterface
             $this->tag->show();
         }
         
-        // verify if the widget is non-editable
-        if (!parent::getEditable())
-        {
-            parent::disableField($this->formName, $this->id);
-        }
-        
         if (isset($this->completion))
         {
             $options = [ 'minChars' => $this->minLength ];
@@ -485,6 +479,12 @@ class TEntry extends TField implements AdiantiWidgetInterface
         if ($this->exitOnEnterOn)
         {
             TScript::create( "tentry_exit_on_enter( '{$this->id}' ); ");
+        }
+        
+        // verify if the widget is non-editable
+        if (!parent::getEditable())
+        {
+            parent::disableField($this->formName, $this->id);
         }
     }
 }

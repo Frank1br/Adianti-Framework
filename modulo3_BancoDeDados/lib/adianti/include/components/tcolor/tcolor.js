@@ -5,8 +5,6 @@ function tcolor_enable_field(form_name, field) {
         setTimeout(function(){
             $(selector).trigger('enable');
             $(selector).removeClass('tfield_disabled');
-            $(selector).attr('readonly', false);
-            $(selector).removeAttr('tabindex');
             $(selector).css('pointer-events', 'auto');
         },1);
     } catch (e) {
@@ -24,8 +22,6 @@ function tcolor_disable_field(form_name, field) {
         setTimeout(function(){
             $(selector).trigger('disable');
             $(selector).addClass('tfield_disabled');
-            $(selector).attr('readonly', true);
-            $(selector).attr('tabindex', "-1");
             $(selector).css('pointer-events', 'none');
         },1);
     } catch (e) {
@@ -40,12 +36,9 @@ function tcolor_start(id, size, theme, change_function, options) {
     var lables = {
         pt : { clear: 'Limpar', save: 'Salvar' },
         es : { clear: 'Limpiar', save: 'Guardar' },
-        en : { clear: 'Clear', save: 'Save' },
-        it : { clear: 'Cancella', save: 'Salva' },
-        de : { clear: 'Löschen', save: 'Speichern' },
-        fr : { clear: 'Effacer', save: 'Enregistrer' } 
+        en : { clear: 'Clear', save: 'Save' }
     };
-    
+
     var tcolor = $(`#${id}`);
     
     options.el = `#${id}+.tcolor`;

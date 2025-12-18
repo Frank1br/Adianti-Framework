@@ -6,43 +6,19 @@ Application.translation = {
         'loading' : 'Loading',
         'close'   : 'Close',
         'insert'  : 'Insert',
-        'open_new_tab' : 'Open on a new tab',
-        'filters' : 'Filters'
+        'open_new_tab' : 'Open on a new tab'
     },
     'pt' : {
         'loading' : 'Carregando',
         'close'   : 'Fechar',
         'insert'  : 'Inserir',
-        'open_new_tab' : 'Abrir em uma nova aba',
-        'filters' : 'Filtros'
+        'open_new_tab' : 'Abrir em uma nova aba'
     },
     'es' : {
         'loading' : 'Cargando',
         'close'   : 'Cerrar',
         'insert'  : 'Insertar',
-        'open_new_tab' : 'Abrir en una nueva pestaña',
-        'filters' : 'Filtros'
-    },
-    'de' : {
-        'loading' : 'Wird geladen',
-        'close'   : 'Schließen',
-        'insert'  : 'Einfügen',
-        'open_new_tab' : 'In neuem Tab öffnen',
-        'filters' : 'Filter'
-    },
-    'fr' : {
-        'loading' : 'Chargement',
-        'close'   : 'Fermer',
-        'insert'  : 'Insérer',
-        'open_new_tab' : 'Ouvrir dans un nouvel onglet',
-        'filters' : 'Filtres'
-    },
-    'it' : {
-        'loading' : 'Caricamento',
-        'close'   : 'Chiudi',
-        'insert'  : 'Inserisci',
-        'open_new_tab' : 'Apri in una nuova scheda',
-        'filters' : 'Filtri'
+        'open_new_tab' : 'Abrir en una nueva pestaña'
     }
 };
 

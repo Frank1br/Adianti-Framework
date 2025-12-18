@@ -48,9 +48,6 @@ Template.start = function() {
     
     // activate item from query string
     Template.findQueryStringMenuItem( true );
-    
-    // set select2 language
-    $.fn.select2.defaults.set('language', $.fn.select2.amd.require("select2/i18n/"+Adianti.language));
 }
 
 /**
@@ -317,10 +314,6 @@ Template.updateDebugPanel = function() {
  * Create master module menu
  */
 Template.generateMasterMenu = function() {
-    if ($('#sidebar').length == 0) {
-        return;
-    }
-    
     // insert module menu
     $('#sidebar').prepend('<div id="module-menu" style="position:relative"> <div id="module-menu-top"></div><div id="module-menu-bottom" style="position:absolute;bottom:10px;display: flex;flex-direction: column;"></div>');
     
@@ -407,16 +400,10 @@ Template.generateMasterMenu = function() {
 Template.transferTopActionsToLeftSidebar = function() {
     // switch class to move to left master sidebar
     $('#navbar-top-right-area').find('.superlight').removeClass('superlight').addClass('master-menu-item');
-    $('#navbar-top-right-area button>span.username').remove(); // Remove "user name" span
+    $('#navbar-top-right-area button>span').remove(); // Remove "user name" span
     
     // move to left master sidebar
     $('#module-menu-bottom').append( $('#navbar-top-right-area').detach() );
-    $('#alert_notifications').removeClass('border-light');
-    $('#alert_notifications').removeClass('start-100');
-    $('#alert_notifications').css('left', '90%');
-    $('#alert_messages').removeClass('border-light');
-    $('#alert_messages').removeClass('start-100');
-    $('#alert_messages').css('left', '90%');
 }
 
 /**
@@ -532,7 +519,7 @@ Template.createPageTab = function(label, href) {
     
     var close_label = Application.translation[Adianti.language]['close'];
     // create new item
-    var new_tab = $('<li class="nav-item"><a data-iframed=true data-href="'+href+'" class="nav-link" style="float:left" onclick="Template.openPageTab(\''+href+'\')">' + label + '</a><a style="float:left;padding-top:0.5rem;padding-left:0.5rem" title="'+close_label+'" onclick="Template.closePageTab(this)"><i class="fa-solid fa-xmark red"></i></a></li>');
+    var new_tab = $('<li class="nav-item"><a data-iframed=true data-href="'+href+'" class="nav-link" style="float:left" onclick="Template.openPageTab(\''+href+'\')">' + label + '</a><a style="float:left;padding-top:0.5rem;padding-left:0.5rem" title="'+close_label+'" onclick="Template.closeCurrentPage()"><i class="fa-solid fa-xmark red"></i></a></li>');
     $('#adianti_tab_area').append(new_tab);
     
     // create new iframe
@@ -584,15 +571,15 @@ Template.openPageTab = function(href, from_side_bar_click) {
 }
 
 /**
- * Close page tab
+ * Close current page tab
  */
-Template.closePageTab = function(generator) {
-    var page = $(generator).parent().find('a.nav-link');
-    if (page.length > 0) {
-        var href = page.data('href');
+Template.closeCurrentPage = function() {
+    var active_page = $('#adianti_tab_area a.nav-link.active');
+    if (active_page.length > 0) {
+        var href = active_page.data('href');
         // remove just iframed tabs
-        if (page.data('iframed')) {
-            page.closest('li').remove();
+        if (active_page.data('iframed')) {
+            active_page.closest('li').remove();
             $('iframe[src="'+href+'"]').remove();
             
             Template.goLastPageTab();
@@ -703,7 +690,6 @@ Template.toggleGlobalTheme = function(generator) {
     localStorage.setItem(appname+".bs-theme", next);
     
     Template.setIFrameGlobalTheme(next);
-    Template.updateChartsMode();
 }
 
 /**
@@ -820,11 +806,6 @@ Template.setNavbarOptions = function(options) {
     if (options['allow_page_tabs'] == '1') {
         $('#adianti_tab_area').show();
     }
-    
-    if (options['only_top_menu'] == '1') {
-        $('#sidebar').remove();
-        $('#sidebar-toggle').remove();
-    }
 }
 
 /**
@@ -832,10 +813,6 @@ Template.setNavbarOptions = function(options) {
  */
 Template.setThemeOptions = function(options) {
     Template.themeOptions = options;
-    
-    if (options['box_layout'] == '1') {
-        $('body').addClass('boxed-layout');
-    }
     
     if (options['menu_dark_color']) {
         $('head').append('<style id="customCSS">[data-menu-theme=dark] #sidebar { background: '+options['menu_dark_color']+'; }</style>');
@@ -862,52 +839,7 @@ Template.setThemeOptions = function(options) {
         
         Template.setIFrameGlobalTheme(options['main_mode']);
         Template.setIFrameMenuTheme(options['menu_mode']);
-        Template.updateChartsMode();
     }
-}
-
-Template.updateChartsMode = function() {
-    var mode = Template.getGlobalTheme();
-    
-    if (mode == 'light') {
-        Chart.defaults.color = '#717171';
-        Chart.defaults.borderColor = 'rgba(0,0,0,0.1)';
-        Chart.defaults.tickColor = 'rgba(0,0,0,0.6)';
-    }
-    else {
-        Chart.defaults.color = '#E0E0E0';
-        Chart.defaults.borderColor = 'rgba(255,255,255,0.2)';
-        Chart.defaults.tickColor = 'rgba(255,255,255,0.8)';
-    }
-    
-    // update all Charts in DOM
-    const canvasElements = document.querySelectorAll('canvas');
-    
-    canvasElements.forEach(canvas => {
-        const chartInstance = Chart.getChart(canvas); // Chart.js v3+
-        if (chartInstance) {
-            // Atualiza cor da grade no eixo X
-            if (chartInstance.options.scales?.x?.grid) {
-                chartInstance.options.scales.x.grid.color = Chart.defaults.borderColor; // cor clara para dark mode
-            }
-    
-            // Atualiza cor da grade no eixo Y
-            if (chartInstance.options.scales?.y?.grid) {
-                chartInstance.options.scales.y.grid.color = Chart.defaults.borderColor;
-            }
-            
-            // Eixo X
-            if (chartInstance.options.scales?.x?.ticks) {
-                chartInstance.options.scales.x.ticks.color = Chart.defaults.tickColor;
-            }
-    
-            // Eixo Y
-            if (chartInstance.options.scales?.y?.ticks) {
-                chartInstance.options.scales.y.ticks.color = Chart.defaults.tickColor;
-            }
-            chartInstance.update();
-        }
-    });
 }
 
 /**
@@ -994,152 +926,4 @@ Template.configure = function(options, context = 'main') {
  */
 Template.getConfigureOptions = function() {
     return Template.options;
-}
-
-/**
- * Trigger click after timeout
- */
-Template.triggerClick = function(selector, timeout) {
-    if (Template.timeoutId) {
-        clearTimeout(Template.timeoutId); // cancela o anterior, se existir
-    }
-    
-    Template.timeoutId = setTimeout(function() {
-        $(selector).click();
-        Template.timeoutId = null; // limpa a referência depois de executar
-    }, timeout);
-}
-
-/**
- * Export adjacent area do PDF
- */
-Template.exportAreaToPdf = function(generator) {
-    
-    Template.loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js', function () {
-        // current actives
-        const activeTabs = $(generator).closest('.card').find('.tab-pane.active');
-
-        // active all
-        $(generator).closest('.card').find('.tab-pane').addClass('show active');
-        
-        // hide tabs navs
-        $(generator).closest('.card').find('.nav.nav-tabs').hide();
-        
-        $(document).scrollTop(0);
-
-        // hide not visible canvas and alerts
-        $('canvas:not(:visible)').hide();
-        $('.talert').hide();
-        
-        const element = $(generator).closest('.card').find('form')[0];
-        const padding = $(element).css('padding');
-        $(element).css('padding', 50);
-        
-        // update charts
-        document.querySelectorAll('canvas').forEach(canvas => {
-          const chartInstance = Chart.getChart(canvas);
-          if (chartInstance) chartInstance.update();
-        });
-        
-        setTimeout(() => {
-          let page_name = $(generator).closest('[page-name]').attr('page-name');
-          const opt = {
-            margin: 0.5,
-            filename: page_name + '.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: {
-              scale: 3,
-              useCORS: true
-            },
-            jsPDF: { unit: 'in', format: 'A3', orientation: 'portrait' }
-          };
-
-          html2pdf().set(opt).from(element).save().then(() => {
-            // reshow elements again
-            $('canvas:not(:visible)').show();
-            $('.talert').show();
-
-            // inactivate all tabs
-            $(generator).closest('.card').find('.tab-pane').removeClass('show active');
-            
-            // reactivate tabs
-            activeTabs.addClass('show active');
-            
-            // show tab navs
-            $(generator).closest('.card').find('.nav.nav-tabs').show();
-            
-            $(element).css('padding', padding);
-          });
-        }, 500);
-    });
-}
-
-/**
- * Load external script just once
- */
-Template.loadScriptOnce = function(url, callback) {
-    // Verifica se o script já foi carregado
-    var existingScript = Array.from(document.querySelectorAll('script[src]'))
-        .find(script => script.src === url);
-
-    if (existingScript) {
-        // Se já estiver carregado e pronto, executa o callback
-        if (typeof html2pdf !== 'undefined') {
-            callback();
-        } else {
-            // Aguarda o carregamento se ainda não estiver disponível
-            existingScript.addEventListener('load', callback);
-        }
-        return;
-    }
-
-    // Cria e adiciona o script
-    var script = document.createElement('script');
-    script.type = 'application/javascript';
-    script.src = url;
-    script.onload = callback; // Executa após o carregamento
-    document.head.appendChild(script);
-}
-
-/**
- * Expand panel body of left search panel
- */
-Template.expandLeftSearchPanel = function() {
-    const element = $('.card-left .card.search-form .card-body');
-    
-    if (element.is(':visible')) {
-        element.css('display', '');
-    }
-    else {
-        const originalDisplay = element.data('original-display') || element.css('display');
-        
-        if (!element.data('original-display')) {
-            element.data('original-display', originalDisplay === 'none' ? 'block' : originalDisplay);
-        }
-        element.css('display', element.data('original-display'));
-    }
-}
-
-/**
- * Collapse left search panel
- */
-Template.collapseLeftSearchPanel = function() {
-    $('.card-left').removeClass('col-lg-3');
-    $('.card-right').removeClass('col-lg-9');
-    $('.card-right').addClass('col-lg-12');
-    $('.card-left').children().hide();
-    $('.card-left').append(`<div id="tbutton_unfold_button" name="collapse_button" class="btn btn-default btn-sm collapse-button" onclick="Template.unfoldLeftSearchPanel();" aria-label="Recolher"><span>
-                                <i class="fa fa-filter" style=";padding-right:4px"></i>`+Application.translation[Adianti.language]['filters']+`</span> </div>`);
-
-}
-
-/**
- * Unfold left search panel
- */
-Template.unfoldLeftSearchPanel = function () {
-    $('.card-left').addClass('col-lg-3');
-    $('.card-right').addClass('col-lg-9');
-    $('.card-right').removeClass('col-lg-12');
-    $('.card-left').children().show();    
-    $('#tbutton_unfold_button').remove();
 }

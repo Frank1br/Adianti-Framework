@@ -63,8 +63,7 @@ function ttable_remove_row(element)
 
 function ttable_remove_row_by_id(table_id, row_id)
 {
-    var table = $('[id="'+table_id+'"]').last(); // in the case there are two details in differente levels of the same DOM
-	table.find('tr[id='+row_id+']').remove();
+	$('#'+table_id).find('tr[id='+row_id+']').remove();
 }
 
 function ttable_show_row(table, rowid)
@@ -96,40 +95,27 @@ function ttable_get_column_values(id, column)
 
 function ttable_add_row(table_id, section, row)
 {
-    var table = $('[id="'+table_id+'"]').last(); // in the case there are two details in differente levels of the same DOM
-    table.find('tbody').append(base64_decode(row));
+    $('#' + table_id + ' tbody').append(base64_decode(row));
 }
 
 function ttable_replace_row_by_id(table_id, id, row)
 {
-    var table = $('[id="'+table_id+'"]').last(); // in the case there are two details in differente levels of the same DOM
-    
-    if (table.find('tbody').find('#'+id).length > 0) {
-        table.find('tbody').find('#'+id).replaceWith(base64_decode(row));
+    if ($('#' + table_id + ' tbody').find('#'+id).length > 0) {
+        $('#' + table_id + ' tbody').find('#'+id).replaceWith(base64_decode(row));
     }
     else {
-        table.find('tbody').append(base64_decode(row));
+        $('#' + table_id + ' tbody').append(base64_decode(row));
     }
 }
 
-function table_selected_row_by_key(id, page_name)
+function table_selected_row_by_key(id)
 {
-    var prefix = '';
-    if (page_name) {
-        prefix = '[page-name="'+page_name+'"] ';
-    }
-    
-    $(prefix + 'tr[data-key="'+id+'"]').addClass('selected');
-    $(prefix + 'tr[data-key="'+id+'"]').find('i.fa-square').removeClass('fa-square').addClass('fa-square-check');
+    $('tr[data-key="'+id+'"]').addClass('selected');
+    $('tr[data-key="'+id+'"]').find('i.fa-square').removeClass('fa-square').addClass('fa-square-check');
 }
 
-function table_unselected_row_by_key(id, page_name)
+function table_unselected_row_by_key(id)
 {
-    var prefix = '';
-    if (page_name) {
-        prefix = '[page-name="'+page_name+'"] ';
-    }
-    
-    $(prefix + 'tr[data-key="'+id+'"]').removeClass('selected');
-    $(prefix + 'tr[data-key="'+id+'"]').find('i.fa-square-check').removeClass('fa-square-check').addClass('fa-square');
+    $('tr[data-key="'+id+'"]').removeClass('selected');
+    $('tr[data-key="'+id+'"]').find('i.fa-square-check').removeClass('fa-square-check').addClass('fa-square');
 }

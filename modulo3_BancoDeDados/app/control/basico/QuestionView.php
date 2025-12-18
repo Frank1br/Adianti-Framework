@@ -1,29 +1,27 @@
 <?php
-
 class QuestionView extends TPage
 {
     public function __construct()
     {
         parent::__construct();
         
-        new TXMLBreadCrumb('menu.xml', __CLASS__);
-
-        $actionYes = new TAction([__CLASS__, 'onYes']);
-        $actionYes->setParameter('nome', 'Usuario logado');
-
-        $actionNo = new TAction([__CLASS__, 'onNo']);
-        $actionNo->setParameter('nome', 'Usuario logado');
+        $action1 = new TAction( [$this, 'onActionYes'] );
+        $action1->setParameter('nome', 'acao1');
         
-        new TQuestion('Você tem certeza que deseja continuar?', $actionYes, $actionNo);
+        $action2 = new TAction( [$this, 'onActionNo'] );
+        $action2->setParameter('nome', 'acao2');
+        
+        new TQuestion('Você gostaria de executar esta operação?', $action1, $action2);
     }
-
-    public static function onYes($param)
+    
+    
+    public static function onActionYes($param)
     {
-        new TMessage('info', 'Você clicou em SIM, ' . $param['nome']);
+        new TMessage('info', 'Você escolheu SIM: ' . $param['nome']);
     }
-
-    public static function onNo($param)
+    
+    public static function onActionNo($param)
     {
-        new TMessage('info', 'Você clicou em NÃO, ' . $param['nome']);
+        new TMessage('error', 'Você escolheu NÃO: ' . $param['nome']);
     }
 }

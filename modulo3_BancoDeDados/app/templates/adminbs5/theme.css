@@ -167,15 +167,6 @@ blockquote {
     --bs-card-cap-bg: white;
 }
 
-.card.nopadding .card-body { 
-    padding:0 !important;
-    padding-top: 10px !important;
-}
-
-.card.nopadding .tab-pane {
-    padding:0 !important;
-}
-
 .card.noborder {
     border:0;
     box-shadow:none;
@@ -433,70 +424,7 @@ div[page_name="SystemContactsList"] .card {
 .system_contacts .system-contact .contact-card .contact-email[data-content=''],
 .system_contacts .system-contact .contact-card .contact-phone[data-content=''] {
     display: none;
-}
-/********************************* CREATOR ********************************************/
-.right-panel .card-form {
-    border: none;
-}
-
-.right-panel .edit-form {
-    border: none;
-}
-
-.right-panel .search-form {
-    border: none;
-}
-
-.ui-dialog .card-form {
-    border: none;
-}
-
-.ui-dialog .edit-form {
-    border: none;
-}
-
-.ui-dialog .search-form {
-    border: none;
-}
-
-.popover .card.card-form {
-    border: none;
-}
-
-.popover .card.edit-form {
-    border: none;
-}
-
-@media (max-width: 992px) /* col-lg-x */ {
-    .card-left .card.search-form .card-body {
-        display: none;
-    }
-}
-
-@media (min-width: 992px) /* col-lg-x */ {
-    .card.search-form .expand-button {
-        display: none;
-    }
-}
-@media (max-width: 992px) /* col-lg-x */ {
-    .card.search-form .collapse-button {
-        display: none;
-    }
-}
-
-.right-panel .collapse-button {
-    display: none;
-}
-
-.card.card-form > .card-header .form-group.row > div > :not(label) {
-    margin-right: 2px;
-}
-
-.plugin_comment.timeline > li > .timeline-item > .timeline-footer
-{
-    padding: 0;
-}
-/********************** Dashboards (Backward compatibility) *********************/
+}/********************** Dashboards (Backward compatibility) *********************/
 
 .info-box
 {
@@ -507,7 +435,7 @@ div[page_name="SystemContactsList"] .card {
     margin-bottom: 15px !important;
     box-shadow: var(--bs-card-box-shadow);
     border-radius: var(--bs-border-radius);
-    border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    border: var(--bs-border-width) solid var(--bs-border-color);
 }
 
 .info-box-icon
@@ -532,7 +460,7 @@ div[page_name="SystemContactsList"] .card {
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    color: var(--bs-secondary);
+    color: gray;
 }
 
 .info-box-number
@@ -540,7 +468,7 @@ div[page_name="SystemContactsList"] .card {
     display: block;
     font-weight: bold;
     font-size: 25px !important;
-    color: var(--bs-body-color);
+    color: #5f5f5f;
 }
 
 .info-box-content
@@ -1120,15 +1048,7 @@ table.vertical-middle td
         max-width: auto;
         width: auto;
     }
-}
-
-body.boxed-layout .navbar-collapse.navbar,
-body.boxed-layout  #adianti_div_content,
-body.boxed-layout .footer>.container-fluid {
-    max-width: 1200px;
-    margin: auto;
-}
-/********************************** MAILBOX *********************************************/
+}/********************************** MAILBOX *********************************************/
 .left-mailbox
 {
     float: left; 
@@ -1242,6 +1162,41 @@ body.boxed-layout .footer>.container-fluid {
     #adianti_tab_area {
         width: 100vw;
     }
+}.right-panel .card-form {
+    border: none;
+}
+
+.right-panel .edit-form {
+    border: none;
+}
+
+.right-panel .search-form {
+    border: none;
+}
+
+.ui-dialog .card-form {
+    border: none;
+}
+
+.ui-dialog .edit-form {
+    border: none;
+}
+
+.ui-dialog .search-form {
+    border: none;
+}
+
+.popover .card.card-form {
+    border: none;
+}
+
+.popover .card.edit-form {
+    border: none;
+}
+
+.plugin_comment.timeline > li > .timeline-item > .timeline-footer
+{
+    padding: 0;
 }.popover {
     --bs-popover-body-padding-x: 10px;
     --bs-popover-body-padding-y: 10px;
@@ -1489,11 +1444,8 @@ body.boxed-layout .footer>.container-fluid {
 }
 
 @media (min-width:767.98px) {
-    /*[data-menu-theme=light] #sidebar:not(.collapsed) {
+    [data-menu-theme=light] #sidebar:not(.collapsed) {
         box-shadow: 0 2px 2px rgba(0,0,0,.25),0 10px 5px rgba(0,0,0,.22), inset 5px 2px 0px -88px rgba(0,0,0,0.1) !important;
-    }*/
-    [data-menu-theme=light] #menu-wrapper:not(.collapsed) {
-        border-right: var(--bs-border-width) solid rgba(0,0,0,0.1) !important;
     }
     [data-menu-theme=dark] #sidebar:not(.collapsed) {
         box-shadow: 0 10px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22), inset -7px 2px 0px -6px rgba(0,0,0,0.1) !important;
@@ -1603,7 +1555,7 @@ a.sidebar-link {
     font-size: var(--ad-font-size-menu);
     margin-left: 5px;
     margin-right: 10px;
-    border-radius: 8px;
+    border-radius: 7px;
     margin-bottom: 5px;
     padding-left: 10px;
 }
@@ -1693,7 +1645,7 @@ a.sidebar-link.active, a.sidebar-link.active:hover {
 
 [data-menu-theme=light] #module-menu {
     border-right: var(--bs-border-width) solid rgba(0,0,0,0.1) !important;
-    background: var(--bs-white);
+    background: #f0f0fa;
 }
 
 .master-menu-item {

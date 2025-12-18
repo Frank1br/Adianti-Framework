@@ -1,4 +1,6 @@
 <?php
+use Adianti\Core\AdiantiCoreTranslator;
+
 /**
  * ApplicationTranslator
  *
@@ -11,15 +13,17 @@
 class ApplicationTranslator
 {
     private static $instance; // singleton instance
-    private $messages;
-    private $enWords;
     private $lang;            // target language
+    private $messages;
+    private $sourceMessages;
     
     /**
      * Class Constructor
      */
     private function __construct()
     {
+        $this->messages = [];
+        $this->messages['en'] = [];
         $this->messages['en'][] = 'File not found';
         $this->messages['en'][] = 'Search';
         $this->messages['en'][] = 'Register';
@@ -126,10 +130,10 @@ class ApplicationTranslator
         $this->messages['pt'][] = 'Extensão não encontrada: ^1';
         $this->messages['pt'][] = 'Modo escuro';
         
-        $this->enWords = [];
-        foreach ($this->messages['en'] as $key => $value)
+        //fim
+        foreach ($this->messages as $lang => $messages)
         {
-            $this->enWords[$value] = $key;
+            $this->sourceMessages[$lang] = array_flip( $this->messages[ $lang ] );
         }
     }
     
@@ -153,10 +157,18 @@ class ApplicationTranslator
      * Define the target language
      * @param $lang     Target language index
      */
-    public static function setLanguage($lang)
+    public static function setLanguage($lang, $global = true)
     {
         $instance = self::getInstance();
-        $instance->lang = $lang;
+        if (in_array($lang, array_keys($instance->messages)))
+        {
+            $instance->lang = $lang;
+        }
+        
+        if ($global)
+        {
+            AdiantiCoreTranslator::setLanguage( $lang );
+        }
     }
     
     /**
@@ -174,15 +186,15 @@ class ApplicationTranslator
      * @param $word     Word to be translated
      * @return          Translated word
      */
-    public static function translate($word, $param1 = NULL, $param2 = NULL, $param3 = NULL)
+    public static function translate($word, $source_language, $param1 = NULL, $param2 = NULL, $param3 = NULL)
     {
         // get the self unique instance
         $instance = self::getInstance();
         // search by the numeric index of the word
         
-        if (isset($instance->enWords[$word]) and !is_null($instance->enWords[$word]))
+        if (isset($instance->sourceMessages[$source_language][$word]) and !is_null($instance->sourceMessages[$source_language][$word]))
         {
-            $key = $instance->enWords[$word]; //$key = array_search($word, $instance->messages['en']);
+            $key = $instance->sourceMessages[$source_language][$word]; //$key = array_search($word, $instance->messages['en']);
             
             // get the target language
             $language = self::getLanguage();
@@ -214,8 +226,6 @@ class ApplicationTranslator
      */
     public static function translateTemplate($template)
     {
-        // get the self unique instance
-        $instance = self::getInstance();
         // search by translated words
         if(preg_match_all( '!_t\{(.*?)\}!i', $template, $match ) > 0)
         {
@@ -225,12 +235,24 @@ class ApplicationTranslator
                 $template = str_replace('_t{'.$word.'}', $translated, $template);
             }
         }
+        
+        if(preg_match_all( '!_tf\{(.*?), (.*?)\}!i', $template, $matches ) > 0)
+        {
+            foreach($matches[0] as $key => $match)
+            {
+                $raw        = $matches[0][$key];
+                $word       = $matches[1][$key];
+                $from       = $matches[2][$key];
+                $translated = _tf($word, $from);
+                $template = str_replace($raw, $translated, $template);
+            }
+        }
         return $template;
     }
 }
 
 /**
- * Facade to translate words
+ * Facade to translate words from english
  * @param $word  Word to be translated
  * @param $param1 optional ^1
  * @param $param2 optional ^2
@@ -239,5 +261,19 @@ class ApplicationTranslator
  */
 function _t($msg, $param1 = null, $param2 = null, $param3 = null)
 {
-        return ApplicationTranslator::translate($msg, $param1, $param2, $param3);
+    return ApplicationTranslator::translate($msg, 'en', $param1, $param2, $param3);
+}
+
+/**
+ * Facade to translate words from specified language
+ * @param $word  Word to be translated
+ * @param $source_language  Source language
+ * @param $param1 optional ^1
+ * @param $param2 optional ^2
+ * @param $param3 optional ^3
+ * @return Translated word
+ */
+function _tf($msg, $source_language = 'en', $param1 = null, $param2 = null, $param3 = null)
+{
+    return ApplicationTranslator::translate($msg, $source_language, $param1, $param2, $param3);
 }

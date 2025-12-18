@@ -47,12 +47,10 @@ function tdatagrid_update_total(datagrid_id)
 	  mutations.forEach(function(mutation) {
 		
 		if (mutation.target.tagName == 'TBODY') {
-			var total_fields = $(datagrid_id).find('[data-total-function]');
-			var total_function = $(datagrid_id).find('[data-total-function]').data('total-function');
+			var total_fields = $(datagrid_id).find('[data-total-function=sum]');
 			
 			total_fields.each(function(k,v) {
-				var values = [];
-				var qtde  = 0;
+				var total = 0;
 				
 				var column_name = $(v).data("column-name");
 				var total_mask  = $(v).data("total-mask");
@@ -69,32 +67,12 @@ function tdatagrid_update_total(datagrid_id)
 				}
 				
 				$('[name="'+datagrid_name+'_'+column_name+'[]"]').each(function(k,v) {
-					values.push( parseFloat( $(v).val() ) );
+					total += parseFloat( $(v).val() );
 				});
 				
-                switch (total_function) {
-                  case 'sum':
-                    result = values.reduce((acc, val) => acc + val, 0);
-                    break;
-                  case 'min':
-                    result = Math.min(...values);
-                    break;
-                  case 'max':
-                    result = Math.max(...values);
-                    break;
-                  case 'avg':
-                    result = values.length ? values.reduce((acc, val) => acc + val, 0) / values.length : 0;
-                    break;
-                  case 'count':
-                    result = values.length;
-                    break;
-                  default:
-                    result = null; // Ou lançar um erro, se desejar
-                }
-                
-                $(v).html( prefix + ' ' + number_format(result, nmask.substring(0,1), nmask.substring(1,2), nmask.substring(2,3) ) );
-                $(v).data('value', result);
-                $(v).attr('data-value', result);
+				$(v).html( prefix + ' ' + number_format(total, nmask.substring(0,1), nmask.substring(1,2), nmask.substring(2,3) ) );
+				$(v).data('value', total);
+				$(v).attr('data-value', total);
 			});
 		}
 	  });

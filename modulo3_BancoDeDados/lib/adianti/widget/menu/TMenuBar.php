@@ -11,7 +11,7 @@ use SimpleXMLElement;
 /**
  * Menubar Widget
  *
- * @version    8.3
+ * @version    8.2
  * @package    widget
  * @subpackage menu
  * @author     Pablo Dall'Oglio
