@@ -116,9 +116,9 @@
                 <action>NotebookView</action>
             </menuitem>
 
-            <menuitem label='BoxesView'>
+            <menuitem label='VBoxView'>
                 <icon>fa:info-circle fa-fw</icon>
-                <action>BoxesView</action>
+                <action>VBoxView</action>
             </menuitem>
 
             <menuitem label='DialogsView'>
